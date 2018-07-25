@@ -7,30 +7,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SearchResults {
-    private static final String RESULTS = "results";
     private ArrayList<ProductItem> productItems;
+    private int productCount;
 
-    public SearchResults(JSONObject searchResults) {
-        productItems = new ArrayList<>();
+    public void setProductCount(int productCount) {
+        this.productCount = productCount;
+    }
 
-        //Fill the arraylist.
-        JSONArray jsonArrayResults = null;
-        try {
-            jsonArrayResults = searchResults.getJSONArray(RESULTS);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public int getProductCount() {
+        return productCount;
+    }
 
-        if (jsonArrayResults == null) {
-            return;
-        }
-        for (int i = 0; i < jsonArrayResults.length(); i++) {
-            try {
-                JSONObject object = jsonArrayResults.getJSONObject(i);
-                productItems.add(new ProductItem(object));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+    public ArrayList<ProductItem> getProductItems() {
+        return productItems;
+    }
+
+    public void setProductItems(ArrayList<ProductItem> productItems) {
+        this.productItems = productItems;
     }
 }
+
+
+

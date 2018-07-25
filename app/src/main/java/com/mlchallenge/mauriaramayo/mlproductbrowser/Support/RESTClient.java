@@ -114,7 +114,17 @@ public class RESTClient extends AsyncTask<String, Integer, JSONObject>
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
-        productManagerCallback.onSearchReady(jsonObject);
+        switch (serviceType) {
+            case SEARCH:
+                productManagerCallback.onSearchReady(jsonObject);
+                break;
+            case PRODUCT_DETAIL:
+                productManagerCallback.onProductDetailsReady(jsonObject);
+                break;
+            case PRODUCT_DESCRIPTION:
+                productManagerCallback.onProductDescriptionReady(jsonObject);
+                break;
+        }
     }
 
     private String inputStreamToString(InputStream is) {

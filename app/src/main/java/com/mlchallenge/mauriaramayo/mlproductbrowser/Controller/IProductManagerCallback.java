@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public interface IProductManagerCallback {
     void onSearchReady(JSONObject jsonObject);
     void onSearchFailed();
-    void onProductDetailsReady();
+    void onProductDetailsReady(JSONObject jsonObject);
     void onProductDetailsFailed();
-    void onProductDescriptionReady();
+    void onProductDescriptionReady(JSONObject jsonObject);
     void onProductDescriptionFailed();
 }
