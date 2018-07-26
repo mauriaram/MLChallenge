@@ -5,6 +5,8 @@ import com.mlchallenge.mauriaramayo.mlproductbrowser.Model.SearchResults;
 
 import java.util.ArrayList;
 
-public interface IParserTaskCallback {
-    void onParseSearchResultsReady(SearchResults searchResults);
+public interface IParserTaskListener {
+    void onParseSearchResultsDone(SearchResults searchResults);
+    void onParseProductDetailDone(ProductItem productItem);
+    void onParseProductDescriptionDone(ProductItem productItem);
 }

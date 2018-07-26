@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class JSONParser {
     private static final String RESULTS = "results";
 
-    public static void parseSearchResults(final JSONObject searchResultsJSON, final IParserTaskCallback parseTaskCallback) {
+    public static void parseSearchResults(final JSONObject searchResultsJSON, final IParserTaskListener parseTaskListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -24,7 +24,8 @@ public class JSONParser {
                 JSONArray jsonArrayResults = null;
                 try {
                     jsonArrayResults = searchResultsJSON.getJSONArray(RESULTS);
-                    count = searchResultsJSON.getInt("primary_results");
+                    JSONObject jsonObjectPaging = searchResultsJSON.getJSONObject("paging");
+                    count = jsonObjectPaging.getInt("primary_results");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -50,10 +51,33 @@ public class JSONParser {
                 SearchResults searchResults = new SearchResults();
                 searchResults.setProductItems(productItems);
                 searchResults.setProductCount(count);
-                parseTaskCallback.onParseSearchResultsReady(searchResults);
+                parseTaskListener.onParseSearchResultsDone(searchResults);
             }
         }, "ParseSearchResultsThread").start();
 
     }
 
+    public static void parseItemDescription(JSONObject jsonObject, ProductItem productItem, IParserTaskListener taskListener) {
+        try {
+            String description = jsonObject.getString("description");
+            productItem.setDescription(description);
+            taskListener.onParseProductDescriptionDone(productItem);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void parseProductDetail(JSONObject jsonObject, ProductItem productItem, IParserTaskListener taskListener) {
+        String[] pictures;
+        try {
+            JSONArray jsonArrayPictures = jsonObject.getJSONArray("pictures");
+            pictures = new String[jsonArrayPictures.length()];
+            for (int i = 0; i < jsonArrayPictures.length(); i++) {
+                pictures[i] = jsonArrayPictures.getJSONObject(i).getString("url");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        taskListener.onParseProductDescriptionDone(productItem);
+    }
 }

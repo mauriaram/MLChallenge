@@ -8,7 +8,8 @@ public class ProductItem {
     private String currencyId;
     private double price;
     private String thumbnail; //url
-    private ItemDescription itemDescription = null;
+    private String description = "";
+    private String[] pictures = null;
 
     public ProductItem(String id, String title, String currencyId, double price, String thumbnail) {
         this.id = id;
@@ -18,11 +19,59 @@ public class ProductItem {
         this.thumbnail = thumbnail;
     }
 
-    public void setItemDescription(ItemDescription itemDescription) {
-        this.itemDescription = itemDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public ItemDescription getItemDescription() {
-        return itemDescription;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPictures(String[] pictures) {
+        this.pictures = pictures;
+    }
+
+    public String[] getPictures() {
+        return pictures;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCurrencyId() {
+        return currencyId;
+    }
+
+    public void setCurrencyId(String currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

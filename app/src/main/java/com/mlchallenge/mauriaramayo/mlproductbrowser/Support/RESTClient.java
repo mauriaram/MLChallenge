@@ -55,7 +55,7 @@ public class RESTClient extends AsyncTask<String, Integer, JSONObject>
 
     @Override
     protected JSONObject doInBackground(String... params) {
-        if (params != null && params.length > 0) {
+        if (params != null && params.length > 0 && isInternetAvailable()) {
             String urlString = null;
             try {
                 urlString = completeURL(serviceType, params);
@@ -72,6 +72,11 @@ public class RESTClient extends AsyncTask<String, Integer, JSONObject>
             }
         }
         return null;
+    }
+
+    private boolean isInternetAvailable() {
+        //TODO: Implement.
+        return true;
     }
 
     private JSONObject executeService(URL url) throws IOException {
@@ -116,6 +121,7 @@ public class RESTClient extends AsyncTask<String, Integer, JSONObject>
         super.onPostExecute(jsonObject);
         switch (serviceType) {
             case SEARCH:
+                //TODO: Send a status to callback as a way to check error.
                 productManagerCallback.onSearchReady(jsonObject);
                 break;
             case PRODUCT_DETAIL:
