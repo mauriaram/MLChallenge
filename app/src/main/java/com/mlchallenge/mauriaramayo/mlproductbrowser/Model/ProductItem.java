@@ -2,6 +2,9 @@ package com.mlchallenge.mauriaramayo.mlproductbrowser.Model;
 
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.util.Currency;
+
 public class ProductItem {
     private String id;
     private String title;
@@ -61,6 +64,14 @@ public class ProductItem {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getPriceFormatted() {
+        String ret = null;
+        NumberFormat format = NumberFormat.getNumberInstance();
+        format.setMaximumFractionDigits(2);
+        ret = currencyId + " " + format.format(price);
+        return ret;
     }
 
     public void setPrice(double price) {

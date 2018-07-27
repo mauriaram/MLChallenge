@@ -100,6 +100,7 @@ public class ProductManager implements IProductManagerCallback, IParserTaskListe
     public void onParseProductDescriptionDone(ProductItem productItem) {
 
     }
+
 }
 
 
