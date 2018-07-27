@@ -24,9 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/thumbnail"
         android:textColor="@color/title"
-        android:textSize="16dp"
-        android:textStyle="bold"
         android:layout_gravity="left"
+        android:paddingRight="16dp"
         android:layout_weight="2"/>
 
     <TextView
